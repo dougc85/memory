@@ -1,0 +1,61 @@
+.Rules {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+
+  &-overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,.9);
+    z-index: 2;
+    border: 1px solid red;
+  }
+
+  &-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    border: 5px solid #97CAEF;
+    border-radius: 10px;
+    background-color: #3FEEE6;
+    text-align: center;
+    overflow: hidden;
+    height: 50%;
+
+    &-border {
+      padding: 2rem;
+      height: 100%;
+      border: 5px solid #55BCC9;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    &-title {
+      color: #FC4445;
+      font-size: 5rem;
+    }
+
+    &-rules {
+      color: black;
+      font-size: 2rem;
+    }
+  }
+
+  &-startbutton {
+    background-color: #CAFAFE;
+    border: 2px solid #55BCC9;
+    color: #FC4445;
+    font-size: 2.4rem;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+  }
+}
