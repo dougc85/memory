@@ -7,10 +7,19 @@ import axios from "axios";
 
 function App() {
 
+  const INITIAL_NO_OF_CARDS = 4;
+
   const [startScreen, toggleStartScreen] = useToggle(true);
-  const [cardTotal, setCardTotal] = useState(6);
+  const [cardTotal, setCardTotal] = useState(INITIAL_NO_OF_CARDS);
   const [cards, setCards] = useState([]);
   const [score, setScore] = useState(0);
+
+  const numArray = [];
+  for (let i = 1; i <= INITIAL_NO_OF_CARDS; i++) {
+    numArray.push(i);
+  }
+
+  const [sequence, setSequence] = useState([...numArray]);
 
   async function fetchCards() {
     const response = await axios.get("https://picsum.photos/list");
@@ -41,17 +50,43 @@ function App() {
   const resetGame = () => {
     toggleStartScreen();
     setCardTotal(6);
+    setScore(0);
+  }
+
+  const shuffleSequence = () => {
+
+    const sequenceList = [...sequence];
+
+    for (let i = sequenceList.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = sequenceList[i];
+      sequenceList[i] = sequenceList[j];
+      sequenceList[j] = temp;
+    }
+
+    setSequence(sequenceList);
   }
 
   const nextRound = () => {
     setCardTotal((currentTotal) => currentTotal + 4);
   }
 
+  //Get new cards on reset
   useEffect(() => {
-    if (cardTotal === 6) {
-      setScore(0);
+    if (score === 0) {
+      fetchCards();
     }
+  }, [score])
+
+  //Get new cards on new round
+  useEffect(() => {
     fetchCards();
+
+    const numArray = [];
+    for (let i = 1; i <= cardTotal; i++) {
+      numArray.push(i);
+    }
+    setSequence([...numArray]);
   }, [cardTotal])
 
   return (
@@ -66,6 +101,8 @@ function App() {
         setCards={setCards}
         fetchCards={fetchCards}
         setScore={setScore}
+        sequence={sequence}
+        shuffleSequence={shuffleSequence}
       />
       {startScreen && <Rules startGame={startGame} />}
     </div>

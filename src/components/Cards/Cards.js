@@ -1,11 +1,17 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import "./Cards.scss";
 import Card from "../Card/Card";
 
 function Cards(props) {
 
-
-  const { nextRound, resetGame, cards, fetchCards, setCards, setScore } = props;
+  const { nextRound,
+    resetGame,
+    cards,
+    fetchCards,
+    setCards,
+    setScore,
+    sequence,
+    shuffleSequence } = props;
 
   //Initialize first time
   useEffect(() => {
@@ -18,7 +24,6 @@ function Cards(props) {
       resetGame();
     } else {
       setScore((oldScore) => {
-        console.log(oldScore);
         return ++oldScore
       })
       setCards((oldCards) => {
@@ -37,21 +42,31 @@ function Cards(props) {
 
   //Check for win condition
   useEffect(() => {
+
     if (cards.length === 0) {
       return;
     }
     for (const card in cards) {
       if (!cards[card]) {
+        shuffleSequence();
         return
       }
     }
     nextRound();
-    fetchCards();
   }, [cards]);
+
+  const renderCards = () => {
+    const cardList = [];
+    Object.keys(cards).forEach((image, idx) => {
+      cardList.push(<Card image={image} key={image} clickCard={clickCard} order={sequence[idx]} />);
+    });
+
+    return cardList;
+  }
 
   return (
     <div className="Cards">
-      {Object.keys(cards).map((image) => <Card image={image} key={image} clickCard={clickCard} />)}
+      {renderCards()}
     </div>
   )
 }
