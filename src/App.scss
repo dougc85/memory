@@ -12,4 +12,18 @@ html {
 
 body {
   box-sizing: border-box;
+  background-color: #97CAEF;
+}
+
+.App {
+  &-name {
+    font-size: 6rem;
+    text-align: center;
+  }
+
+  &-score {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+  }
 }

@@ -1,8 +1,14 @@
 .Cards {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  height: 400px;
   box-sizing: content-box;
+
+  &-group {
+    display:flex;
+    justify-content: space-around;
+    width: 80%;
+    padding-bottom: 4rem;
+  }
 }
+

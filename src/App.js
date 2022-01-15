@@ -49,7 +49,7 @@ function App() {
 
   const resetGame = () => {
     toggleStartScreen();
-    setCardTotal(6);
+    setCardTotal(4);
     setScore(0);
   }
 
@@ -91,8 +91,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Memory Clickeroo</h1>
-      <p>Score: {`${score}`}</p>
+      <h1 className="App-name">Memory Clickeroo</h1>
+      <p className="App-score">Score: {`${score}`}</p>
       <Cards cardTotal={cardTotal}
         setCardTotal={setCardTotal}
         resetGame={resetGame}

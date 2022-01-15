@@ -11,7 +11,8 @@ function Cards(props) {
     setCards,
     setScore,
     sequence,
-    shuffleSequence } = props;
+    shuffleSequence,
+    cardTotal } = props;
 
   //Initialize first time
   useEffect(() => {
@@ -56,12 +57,25 @@ function Cards(props) {
   }, [cards]);
 
   const renderCards = () => {
+    //create array of Card components
     const cardList = [];
     Object.keys(cards).forEach((image, idx) => {
       cardList.push(<Card image={image} key={image} clickCard={clickCard} order={sequence[idx]} />);
     });
 
-    return cardList;
+    //organize those Card components into divs, 4 per
+    const numDivs = cardTotal / 4;
+    const divList = [];
+
+    for (let i = 0; i < numDivs; i++) {
+      const miniCardList = [];
+      for (let j = 0; j < 4; j++) {
+        miniCardList[j] = cardList.pop();
+      }
+      divList.push(<div className={`Cards-group`}>{miniCardList}</div>);
+      console.log(divList);
+    }
+    return divList;
   }
 
   return (
