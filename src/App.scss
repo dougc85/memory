@@ -13,12 +13,14 @@ html {
 body {
   box-sizing: border-box;
   background-color: #97CAEF;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .App {
   &-name {
     font-size: 6rem;
     text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
   }
 
   &-score {

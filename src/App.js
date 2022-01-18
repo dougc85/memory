@@ -4,15 +4,18 @@ import Rules from "./components/Rules/Rules";
 import Cards from "./components/Cards/Cards";
 import useToggle from './hooks/useToggle';
 import axios from "axios";
+import Loading from "./components/Loading/Loading";
 
 function App() {
 
   const INITIAL_NO_OF_CARDS = 4;
 
+
   const [startScreen, toggleStartScreen] = useToggle(true);
   const [cardTotal, setCardTotal] = useState(INITIAL_NO_OF_CARDS);
   const [cards, setCards] = useState([]);
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const numArray = [];
   for (let i = 1; i <= INITIAL_NO_OF_CARDS; i++) {
@@ -38,6 +41,7 @@ function App() {
       newCards[image] = false;
     }
     setCards(newCards);
+
   }
 
   const startGame = (e) => {
@@ -91,8 +95,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="App-name">Memory Clickeroo</h1>
+      <h1 className="App-name">REMEMOGRAPHY</h1>
       <p className="App-score">Score: {`${score}`}</p>
+      {loading && <Loading />}
       <Cards cardTotal={cardTotal}
         setCardTotal={setCardTotal}
         resetGame={resetGame}

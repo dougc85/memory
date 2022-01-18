@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import "./Cards.scss";
 import Card from "../Card/Card";
 
@@ -12,7 +12,8 @@ function Cards(props) {
     setScore,
     sequence,
     shuffleSequence,
-    cardTotal } = props;
+    cardTotal
+  } = props;
 
   //Initialize first time
   useEffect(() => {
@@ -63,6 +64,13 @@ function Cards(props) {
       cardList.push(<Card image={image} key={image} clickCard={clickCard} order={sequence[idx]} />);
     });
 
+    for (let i = cardList.length - 1; i > 0; i--) {
+      let j = Math.floor((Math.random() * (i + 1)));
+      let temp = cardList[i];
+      cardList[i] = cardList[j];
+      cardList[j] = temp;
+    }
+
     //organize those Card components into divs, 4 per
     const numDivs = cardTotal / 4;
     const divList = [];
@@ -73,7 +81,6 @@ function Cards(props) {
         miniCardList[j] = cardList.pop();
       }
       divList.push(<div className={`Cards-group`}>{miniCardList}</div>);
-      console.log(divList);
     }
     return divList;
   }

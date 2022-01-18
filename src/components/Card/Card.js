@@ -10,8 +10,8 @@ function Card(props) {
     props.clickCard(props.image);
   }
   return (
-    <div className="Card" style={{ order: order }} onClick={handleClick}>
-      <img src={props.image} alt={props.image} />
+    <div className="Card" style={{ order: order }} onClick={handleClick} >
+      <img className="Card-image" src={props.image} alt={props.image} />
     </div>
   )
 }
