@@ -11,7 +11,10 @@ function App() {
   const INITIAL_NO_OF_CARDS = 4;
   const cardsRef = useRef(null);
 
+  let scoreFromStorage = localStorage.getItem('memoryGameHighScore') || '0';
+  scoreFromStorage = +scoreFromStorage;
 
+  const [highScore, setHighScore] = useState(scoreFromStorage);
   const [startScreen, toggleStartScreen] = useToggle(true);
   const [cardTotal, setCardTotal] = useState(INITIAL_NO_OF_CARDS);
   const [cards, setCards] = useState([]);
@@ -79,21 +82,29 @@ function App() {
 
   const handleLoad = () => {
     const newLoadedArray = [...loadedArray, true];
-    setLoadedArray(newLoadedArray);
+    if (loadedArray.length < cardTotal) {
+      setLoadedArray(newLoadedArray);
+    }
   }
 
   useEffect(() => {
-    console.log(loadedArray);
     if (loadedArray.length >= cardTotal) {
-      setLoading(false);
-      cardsRef.current.style.display = "flex";
+      setTimeout(() => {
+        setLoading(false);
+        cardsRef.current.style.display = "flex";
+      }, 1000);
     }
   }, [loadedArray]);
 
   //Get new cards on reset
   useEffect(() => {
+    if (score > highScore) {
+      setHighScore(score);
+      localStorage.setItem('memoryGameHighScore', score.toString());
+    }
     if (score === 0) {
       fetchCards();
+      setLoadedArray([]);
       setLoading(true);
       cardsRef.current.style.display = 'none';
     }
@@ -102,6 +113,7 @@ function App() {
   //Get new cards on new round
   useEffect(() => {
     fetchCards();
+    setLoadedArray([]);
     setLoading(true);
     cardsRef.current.style.display = 'none';
 
@@ -115,7 +127,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="App-name">REMEMOGRAPHY</h1>
-      <p className="App-score">Score: {`${score}`}</p>
+      <p className="App-score">Score: {`${score}`} High Score: {`${highScore}`}</p>
       {loading && <Loading />}
       <Cards cardTotal={cardTotal}
         setCardTotal={setCardTotal}
@@ -129,6 +141,7 @@ function App() {
         shuffleSequence={shuffleSequence}
         handleLoad={handleLoad}
         cardsRef={cardsRef}
+        setHighScore={setHighScore}
       />
       {startScreen && <Rules startGame={startGame} />}
     </div>
