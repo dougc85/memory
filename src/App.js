@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Rules from "./components/Rules/Rules";
 import Cards from "./components/Cards/Cards";
 import useToggle from './hooks/useToggle';
@@ -9,6 +9,7 @@ import Loading from "./components/Loading/Loading";
 function App() {
 
   const INITIAL_NO_OF_CARDS = 4;
+  const cardsRef = useRef(null);
 
 
   const [startScreen, toggleStartScreen] = useToggle(true);
@@ -16,6 +17,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [loadedArray, setLoadedArray] = useState([]);
 
   const numArray = [];
   for (let i = 1; i <= INITIAL_NO_OF_CARDS; i++) {
@@ -75,16 +77,33 @@ function App() {
     setCardTotal((currentTotal) => currentTotal + 4);
   }
 
+  const handleLoad = () => {
+    const newLoadedArray = [...loadedArray, true];
+    setLoadedArray(newLoadedArray);
+  }
+
+  useEffect(() => {
+    console.log(loadedArray);
+    if (loadedArray.length >= cardTotal) {
+      setLoading(false);
+      cardsRef.current.style.display = "flex";
+    }
+  }, [loadedArray]);
+
   //Get new cards on reset
   useEffect(() => {
     if (score === 0) {
       fetchCards();
+      setLoading(true);
+      cardsRef.current.style.display = 'none';
     }
   }, [score])
 
   //Get new cards on new round
   useEffect(() => {
     fetchCards();
+    setLoading(true);
+    cardsRef.current.style.display = 'none';
 
     const numArray = [];
     for (let i = 1; i <= cardTotal; i++) {
@@ -108,6 +127,8 @@ function App() {
         setScore={setScore}
         sequence={sequence}
         shuffleSequence={shuffleSequence}
+        handleLoad={handleLoad}
+        cardsRef={cardsRef}
       />
       {startScreen && <Rules startGame={startGame} />}
     </div>

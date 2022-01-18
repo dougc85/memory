@@ -3,7 +3,7 @@ import "./Card.scss";
 
 function Card(props) {
 
-  const { order } = props;
+  const { order, handleLoad } = props;
 
 
   const handleClick = () => {
@@ -11,7 +11,7 @@ function Card(props) {
   }
   return (
     <div className="Card" style={{ order: order }} onClick={handleClick} >
-      <img className="Card-image" src={props.image} alt={props.image} />
+      <img className="Card-image" src={props.image} alt={props.image} onLoad={handleLoad} />
     </div>
   )
 }

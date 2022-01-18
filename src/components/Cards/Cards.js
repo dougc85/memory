@@ -12,7 +12,9 @@ function Cards(props) {
     setScore,
     sequence,
     shuffleSequence,
-    cardTotal
+    cardTotal,
+    handleLoad,
+    cardsRef,
   } = props;
 
   //Initialize first time
@@ -61,7 +63,7 @@ function Cards(props) {
     //create array of Card components
     const cardList = [];
     Object.keys(cards).forEach((image, idx) => {
-      cardList.push(<Card image={image} key={image} clickCard={clickCard} order={sequence[idx]} />);
+      cardList.push(<Card image={image} key={image} clickCard={clickCard} order={sequence[idx]} handleLoad={handleLoad} />);
     });
 
     for (let i = cardList.length - 1; i > 0; i--) {
@@ -86,7 +88,7 @@ function Cards(props) {
   }
 
   return (
-    <div className="Cards">
+    <div className="Cards" ref={cardsRef} style={{ display: "none" }}>
       {renderCards()}
     </div>
   )
