@@ -5,6 +5,7 @@ import Cards from "./components/Cards/Cards";
 import useToggle from './hooks/useToggle';
 import axios from "axios";
 import Loading from "./components/Loading/Loading";
+import Scores from "./components/Scores/Scores";
 
 function App() {
 
@@ -127,7 +128,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="App-name">REMEMOGRAPHY</h1>
-      <p className="App-score">Score: {`${score}`} High Score: {`${highScore}`}</p>
+      <Scores score={score} highScore={highScore} />
       {loading && <Loading />}
       <Cards cardTotal={cardTotal}
         setCardTotal={setCardTotal}

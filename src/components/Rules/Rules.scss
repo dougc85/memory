@@ -1,3 +1,5 @@
+@import "../../partials/mixins";
+
 .Rules {
   position: fixed;
   top: 0;
@@ -5,6 +7,8 @@
   height: 100vh;
   width: 100vw;
   z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
 
   &-overlay {
     height: 100%;
@@ -25,6 +29,30 @@
     text-align: center;
     overflow: hidden;
     height: 50%;
+    min-height: 32rem;
+    max-height: 50rem;
+    @include media(phone-landscape) {
+      width: 75%;
+    }
+
+    @include media(phone-landscape-small) {
+      width: 80%;
+    }
+
+    @include media(phone) {
+      max-height: none;
+      height: 65%;
+    }
+
+    @include media(phone-small) {
+      max-height: none;
+      height: 75%;
+    }
+
+    @include media(phone-extra-small) {
+      max-height: none;
+      height: 85%;
+    }
 
     &-border {
       padding: 2rem;
@@ -51,6 +79,7 @@
     &-addendum {
       color: black;
       font-size: 1.3rem;
+      margin: 1rem 0;
     }
   }
 

@@ -11,7 +11,9 @@ function Card(props) {
   }
   return (
     <div className="Card" style={{ order: order }} onClick={handleClick} >
-      <img className="Card-image" src={props.image} alt={props.image} onLoad={handleLoad} />
+      <div className="Card-image-container">
+        <img className="Card-image" src={props.image} alt={props.image} onLoad={handleLoad} />
+      </div>
     </div>
   )
 }

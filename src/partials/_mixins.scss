@@ -1,0 +1,57 @@
+@mixin media($breakpoint) {
+  @if $breakpoint == phone-extra-small {
+    @media only screen and (max-width: 350px) {
+      @content
+    };
+  }
+  @if $breakpoint == phone-small {
+    @media only screen and (max-width: 440px) {
+      @content
+    };
+  }
+
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 500px) {
+      @content
+    };
+  }
+
+  @if $breakpoint == phone-landscape-small {
+    @media only screen and (max-width: 600px) 
+                       and (orientation: landscape) {
+      @content
+  };
+  }
+
+  @if $breakpoint == phone-landscape {
+    @media only screen and (max-width: 850px) 
+                       and (orientation: landscape) {
+      @content
+  };
+  }
+
+  @if $breakpoint == tab-portrait {
+    @media only screen and (max-width: 850px) 
+                       and (orientation: portrait) {
+      @content
+    };
+  }
+
+  @if $breakpoint == tab-landscape-small {
+    @media only screen and (max-width: 1050px) {
+      @content
+    };
+  }
+
+  @if $breakpoint == tab-landscape {
+    @media only screen and (max-width: 1200px) {
+      @content
+    };
+  }
+
+  @if $breakpoint == narrow-vertical {
+    @media only screen and (max-height: 800px) {
+      @content
+    };
+  }
+}

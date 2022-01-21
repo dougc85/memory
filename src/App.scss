@@ -1,3 +1,5 @@
+@import "./partials/mixins";
+
 *, 
 *::after,
 *::before {
@@ -8,6 +10,26 @@
 
 html {
   font-size: 62.5%;
+
+  @include media(tab-landscape) {
+    font-size: 54%;
+  }
+
+  @include media(tab-landscape-small) {
+    font-size: 43%;
+  }
+
+  @include media(phone-landscape-small) {
+    font-size: 38%;
+  }
+
+  @include media(tab-portrait) {
+    font-size: 38%;
+  }
+
+  @include media(phone-small) {
+    font-size: 33%;
+  }
 }
 
 body {
@@ -21,11 +43,6 @@ body {
     font-size: 6rem;
     text-align: center;
     font-family: 'Merriweather Sans', sans-serif;
-  }
-
-  &-score {
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 4rem;
+    margin: 1.5rem auto;
   }
 }

@@ -1,4 +1,39 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .Loading {
-  text-align: center;
-  font-size: 10rem;
+  margin-top: 10rem;
+  
+  &-ring {
+    margin: 0 auto;
+    background-image: linear-gradient(#97CAEF, #FC4445);
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s infinite;
+    animation-timing-function: linear;
+
+  }
+  &-center {
+    position: absolute;
+    height: 75%;
+    width: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #97CAEF;
+    border-radius: 50%;
+  }
+  &-word {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
 }

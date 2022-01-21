@@ -1,14 +1,36 @@
+@import "../../partials/mixins";
+
 .Cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   box-sizing: content-box;
 
+  @include media(tab-portrait) {
+    height: 80vh;
+    justify-content: space-evenly;
+  }
+
   &-group {
     display:flex;
     justify-content: space-around;
     width: 80%;
     padding-bottom: 4rem;
+
+    @include media(tab-landscape-small) {
+      width: 90%;
+    }
+
+    @include media(phone-landscape) {
+      justify-content: space-evenly;
+      padding-bottom: 0;
+    }
+
+    @include media(tab-portrait) {
+      flex-direction: column;
+      width: inherit;
+      justify-content: space-between;
+    }
   }
 }
 
