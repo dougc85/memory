@@ -40,16 +40,11 @@
     @include media(phone) {
       max-height: none;
       height: 65%;
+      width: 70%;
     }
 
     @include media(phone-small) {
-      max-height: none;
-      height: 75%;
-    }
-
-    @include media(phone-extra-small) {
-      max-height: none;
-      height: 85%;
+      height: 65%;
     }
 
     &-border {
